@@ -37,7 +37,11 @@
 #include "util/string.h"
 #include "util/version.h"
 
+// inluce pybind to bind functionality to python 
+#include "pybind11/pybind11.h"
+
 namespace colmap {
+
 namespace {
 
 typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>
@@ -1506,4 +1510,15 @@ DatabaseTransaction::DatabaseTransaction(Database* database)
 
 DatabaseTransaction::~DatabaseTransaction() { database_->EndTransaction(); }
 
+namespace py = pybind11;
+
+PYBIND11_MODULE(database, handle){
+  handle.doc() = "handle database operations on lower level";
+  // py::class_<>(handle, "database").def could be handled as empty class and functions as static methods
+  handle.def("read_all_cameras", &ReadAllCameras);
+  handle.def("read_camera", &ReadCamera);
+}
+
 }  // namespace colmap
+
+

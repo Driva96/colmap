@@ -36,6 +36,12 @@
 
 #include "util/types.h"
 
+//include pybind and automatic type conversion
+#include "pybind11/pybind11.h"
+#include "pybind11/stl.h"
+
+
+
 namespace colmap {
 
 // Camera class that holds the intrinsic parameters. Cameras may be shared
@@ -205,6 +211,14 @@ const double* Camera::ParamsData() const { return params_.data(); }
 double* Camera::ParamsData() { return params_.data(); }
 
 void Camera::SetParams(const std::vector<double>& params) { params_ = params; }
+
+namespace py = pybind11;
+
+PYBIND11_MODULE(camera, hanlde){
+  py::class_<Camera>(handle, "Camera");
+    .def(py::init<>());
+    .def("get_params", &Camera::Params<>);
+}
 
 }  // namespace colmap
 

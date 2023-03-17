@@ -64,6 +64,8 @@ endif()
 
 COLMAP_ADD_LIBRARY(colmap ${COLMAP_SOURCES})
 
+
+
 if(CUDA_ENABLED)
     set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --use_fast_math")
 
@@ -92,3 +94,6 @@ else()
     target_link_libraries(colmap
         ${COLMAP_INTERNAL_LIBRARIES} ${COLMAP_EXTERNAL_LIBRARIES})
 endif()
+
+pybind11_add_module(database, base/database.cc)
+pybind11_add_module(camera, base/camera.h)

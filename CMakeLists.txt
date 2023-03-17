@@ -48,6 +48,11 @@ include(CheckCXXCompilerFlag)
 # the CMake policies in this file
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CMakeHelper.cmake NO_POLICY_SCOPE)
 
+################################################################################
+# Include pybind11
+################################################################################
+
+add_subdirectory("../pybind11" pybind11)
 
 ################################################################################
 # Options
@@ -56,7 +61,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CMakeHelper.cmake NO_POLICY_SCOPE)
 option(SIMD_ENABLED "Whether to enable SIMD optimizations" ON)
 option(OPENMP_ENABLED "Whether to enable OpenMP parallelization" ON)
 option(IPO_ENABLED "Whether to enable interprocedural optimization" ON)
-option(CUDA_ENABLED "Whether to enable CUDA, if available" ON)
+option(CUDA_ENABLED "Whether to enable CUDA, if available" OFF)
 option(GUI_ENABLED "Whether to enable the graphical UI" ON)
 option(OPENGL_ENABLED "Whether to enable OpenGL, if available" ON)
 option(TESTS_ENABLED "Whether to build test binaries" OFF)
@@ -83,6 +88,11 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 ################################################################################
 # Find packages
 ################################################################################
+
+# Add to Module path installed packages from vcpkg (windows homebre equivalent) only 32-bit INCOMPATIBLE
+#list(APPEND CMAKE_MODULE_PATH "C:/Users/dueding/OneDrive - Fraunhofer/Documents/projects/src/vcpkg/packages")
+#set(Ceres_DIR "C:\\Users\\dueding\\OneDrive - Fraunhofer\\Documents\\projects\\src\\vcpkg\\packages\\ceres_x86-windows\\share\\ceres")
+list( APPEND CMAKE_PREFIX_PATH "C:/Users/dueding/install" )
 
 if(OPENMP_ENABLED)
     find_package(OpenMP QUIET)
