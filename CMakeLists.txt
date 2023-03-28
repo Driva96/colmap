@@ -92,7 +92,8 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # Add to Module path installed packages from vcpkg (windows homebre equivalent) only 32-bit INCOMPATIBLE
 #list(APPEND CMAKE_MODULE_PATH "C:/Users/dueding/OneDrive - Fraunhofer/Documents/projects/src/vcpkg/packages")
 #set(Ceres_DIR "C:\\Users\\dueding\\OneDrive - Fraunhofer\\Documents\\projects\\src\\vcpkg\\packages\\ceres_x86-windows\\share\\ceres")
-list( APPEND CMAKE_PREFIX_PATH "C:/Users/dueding/install" )
+
+list( APPEND CMAKE_PREFIX_PATH "C:/Users/dueding/install; C:/Users/dueding/OneDrive - Fraunhofer/Documents/projects/install" )
 
 if(OPENMP_ENABLED)
     find_package(OpenMP QUIET)
